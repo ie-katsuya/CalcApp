@@ -24,38 +24,43 @@ class MainActivity : AppCompatActivity(), View.OnClickListener  {
 
         var result = 0F
 
-        if(editText1.text.toString().length != 0 && editText2.text.toString().length != 0) {
-            val intent = Intent(this, CalcEqual::class.java)
+        if(editText1.text.toString().isEmpty() == false && editText2.text.toString().isEmpty()== false) {
+            if(editText1.text.toString() != "," && editText1.text.toString() != "." && editText1.text.toString() != "-") {
+                if (editText2.text.toString() != "," && editText2.text.toString() != "." && editText2.text.toString() != "-") {
 
-            Log.d("Kotlin", "エラー")
+                    val intent = Intent(this, CalcEqual::class.java)
 
-            if(v.id == R.id.button1) {
+                    if (v.id == R.id.button1) {
 
-                result = (Integer.parseInt(editText1.text.toString())).toFloat() + (Integer.parseInt(editText2.text.toString())).toFloat()
-                intent.putExtra("VALUE1", result)
+                        result = (editText1.text.toString()).toFloat() + (editText2.text.toString()).toFloat()
+                        intent.putExtra("VALUE1", result)
+                        startActivity(intent)
 
-            }else if(v.id == R.id.button2) {
+                    } else if (v.id == R.id.button2) {
 
-                result = (Integer.parseInt(editText1.text.toString())).toFloat() - (Integer.parseInt(editText2.text.toString())).toFloat()
-                intent.putExtra("VALUE1", result)
+                        result = (editText1.text.toString()).toFloat() - (editText2.text.toString()).toFloat()
+                        intent.putExtra("VALUE1", result)
+                        startActivity(intent)
 
-            }else if(v.id == R.id.button3) {
+                    } else if (v.id == R.id.button3) {
 
-                result = (Integer.parseInt(editText1.text.toString())).toFloat() * (Integer.parseInt(editText2.text.toString())).toFloat()
-                intent.putExtra("VALUE1", result)
+                        result = (editText1.text.toString()).toFloat() * (editText2.text.toString()).toFloat()
+                        intent.putExtra("VALUE1", result)
+                        startActivity(intent)
 
-            }else if(v.id == R.id.button4) {
+                    } else if (v.id == R.id.button4) {
 
-                result = (Integer.parseInt(editText1.text.toString())).toFloat() / (Integer.parseInt(editText2.text.toString())).toFloat()
-                intent.putExtra("VALUE1", result)
-
+                        if ((editText2.text.toString()).toFloat() != 0F) {
+                            result = (editText1.text.toString()).toFloat() / (editText2.text.toString()).toFloat()
+                            intent.putExtra("VALUE1", result)
+                            startActivity(intent)
+                        } else {
+                            Log.d("error", "0で割ろうとしました。")
+                        }
+                    }
+                }
             }
-            startActivity(intent)
-
-        }else {
-
         }
-
     }
 
 }
